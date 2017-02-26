@@ -24,12 +24,26 @@ System.register(['angular2/core', './authors.service'], function(exports_1, cont
             AuthorsComponent = (function () {
                 function AuthorsComponent(authorService) {
                     this.title = "List of authours";
+                    this.isActive = false;
                     this.authors = authorService.getAuthors();
                 }
+                AuthorsComponent.prototype.onDivClick = function () {
+                    console.log("handled by div");
+                };
+                AuthorsComponent.prototype.onClick = function ($event) {
+                    if (this.isActive) {
+                        this.isActive = false;
+                    }
+                    else {
+                        this.isActive = true;
+                    }
+                    console.log("Button Clicked", $event);
+                    $event.stopPropagation();
+                };
                 AuthorsComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "\n        <h2>Authors</h2>\n        {{title}}\n        <ul>\n            <li *ngFor=\"#author of authors\">\n                <b><span>{{author}}</span></b>\n            </li>\n        </ul>\n        ",
+                        template: "\n        <h2>Authors</h2>\n        {{title}}\n        <ul>\n            <li *ngFor=\"#author of authors\">\n                <b><span>{{author}}</span></b>\n            </li>\n        </ul>\n        <div (click)=\"onDivClick()\">\n            <button class=\"btn btn-primary\" [style.backgroundColor]=\"isActive ? 'blue' : 'gray'\" (click)=\"onClick($event)\">Submit</button>\n        </div>\n        <input type=\"text\" [value]=\"title\" (input)=\"title = $event.target.value\" />\n        ",
                         providers: [authors_service_1.AuthorService]
                     }), 
                     __metadata('design:paramtypes', [authors_service_1.AuthorService])
