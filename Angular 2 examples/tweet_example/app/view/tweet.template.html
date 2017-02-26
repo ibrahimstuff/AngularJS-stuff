@@ -1,0 +1,15 @@
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" [src]="data.tweetPic" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <b> {{data.User}} </b>
+      <span class="username">@{{data.userName}}</span>
+    </h4>
+    {{data.tweet}}
+    <h3><like [isLike]="data.isLike" [likeCount]="data.likeCount"></like></h3>
+  </div>
+</div>
